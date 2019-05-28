@@ -23,7 +23,7 @@ const transportation = {
   },
 }
 
-const deepFreeze = (o => {
+const deepFreeze = o => {
   Object.freeze(o);
   if (o === undefined) return o;
 
@@ -36,7 +36,9 @@ const deepFreeze = (o => {
   });
 
   return o;
-})(transportation);
+}
+
+deepFreeze(transportation);
 
 const drawCircle = (point, context) => {
   context.beginPath();
@@ -114,8 +116,7 @@ const click = (e, journey, context) => {
     drawText(text, journey.end.X-offsetX, journey.end.Y-offsetY, context);
 
   } else {
-    journey.start = null;
-    journey.end = null;
+    for (let prop in journey) journey[prop] = null;
     context.lineWidth = 1;
     context.clearRect(0,0,2430,1558);
   }

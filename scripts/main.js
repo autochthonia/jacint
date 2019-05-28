@@ -43,20 +43,20 @@ deepFreeze(transportation);
 const drawCircle = (point, context) => {
   context.beginPath();
   context.arc(point.X, point.Y, 10, 0, 2*Math.PI, false);
-  context.fillStyle='#008800';
+  context.fillStyle = '#008800';
   context.fill();
-  context.strokeStyle='#003300';
+  context.strokeStyle = '#003300';
   context.stroke();
 }
 
 const drawText = (text, x, y, context) => {
-  context.strokeStyle='#FFFFFF';
-  context.fillStyle='#000000';
-  context.lineWidth=1.5;
+  context.strokeStyle = '#FFFFFF';
+  context.fillStyle = '#000000';
+  context.lineWidth = 1.5;
 
   for (let line of text.split("\n")) {
-    context.fillText(line,x,y);
-    context.strokeText(line,x,y);
+    context.fillText(line, x, y);
+    context.strokeText(line, x, y);
     y += lineHeight;
   }
 }
@@ -107,13 +107,13 @@ const click = (e, journey, context) => {
     drawCircle(journey.end, context);
     drawCircle(journey.start, context);
 
-    const dist = Math.floor(Math.sqrt(dX*dX + dY*dY) * scale);
+    const dist = Math.floor(Math.sqrt(dX * dX + dY * dY) * scale);
     const text = calculateTravel(dist);
 
-    const offsetX = (journey.end.X>2200) ? 426 : -24;
-    const offsetY = (journey.end.Y>1400) ? 440 : -10;
+    const offsetX = (journey.end.X > 2200) ? 426 : -24;
+    const offsetY = (journey.end.Y > 1400) ? 440 : -10;
 
-    drawText(text, journey.end.X-offsetX, journey.end.Y-offsetY, context);
+    drawText(text, journey.end.X - offsetX, journey.end.Y - offsetY, context);
 
   } else {
     for (let prop in journey) journey[prop] = null;

@@ -23,6 +23,21 @@ const transportation = {
   },
 }
 
+const deepFreeze = (o => {
+  Object.freeze(o);
+  if (o === undefined) return o;
+
+  Object.getOwnPropertyNames(o).forEach(prop => {
+    if (o[prop] !== null
+    && (typeof o[prop] === "object" || typeof o[prop] === "function")
+    && !Object.isFrozen(o[prop])) {
+      deepFreeze(o[prop]);
+    }
+  });
+
+  return o;
+})(transportation);
+
 const drawCircle = (point, context) => {
   context.beginPath();
   context.arc(point.X, point.Y, 10, 0, 2*Math.PI, false);

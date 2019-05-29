@@ -122,7 +122,7 @@ const click = (e, journey, context) => {
   }
 }
 
-window.onload = () => {
+const onload = () => {
   const map = document.getElementById('map');
   const context = map.getContext('2d');
   context.font = 'Bold 32px Arial';
@@ -134,3 +134,5 @@ window.onload = () => {
 
   map.addEventListener('click', event => click(event, journey, context));
 };
+
+export default onload;

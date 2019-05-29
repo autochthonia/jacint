@@ -11,15 +11,15 @@ class App extends Component {
       <HashRouter basename="/">
         <div>
           <Menu>
-            <a id="home" className="menu-item" href="/home">Home</a>
-            <a id="about" className="menu-item" href="/about">About</a>
+            <a id="creation" className="menu-item" href="/creation">Creation</a>
+            <a id="blessedIsle" className="menu-item" href="/blessedIsle">Blessed Isle</a>
             <a id="default" className="menu-item" href="/">Home</a>
             <div id="copyright" className="copyright">Exalted is © White Wolf AB and Onyx Path.</div>
           </Menu>
           <Switch>
-            <Route path="/home" component={CreationFull} />
-            <Route path="/about" component={About} />
-            <Redirect from="/" to="/home" />
+            <Route path="/creation" component={CreationFull} />
+            <Route path="/blessedIsle" component={BlessedIsle} />
+            <Redirect from="/" to="/creation" />
           </Switch>
 
         </div>
@@ -28,7 +28,6 @@ class App extends Component {
   }
 }
 
-const Home = () => <div><h2>Home</h2></div>
-const About = () => <div><h2>About</h2></div>
+const BlessedIsle = () => <div><h2>Blessed Isle</h2></div>
 
 export default App;

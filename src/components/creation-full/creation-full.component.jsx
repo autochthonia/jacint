@@ -1,25 +1,13 @@
 import React, {Component} from 'react';
 
-import Background from './creation-full.map.jpg';
-import onload from '../../utils/draw';
-
-const style = {
-  backgroundImage: `url(${Background})`,
-  backgroundRepeat: 'no-repeat',
-  width: 2430,
-  height: 1558
-}
+import ClickableCanvas from '../clickable-canvas/clickable-canvas.component';
+import './creation-full.component.css';
 
 class CreationFull extends Component {
-  componentDidMount() {
-    onload();
-  }
-
   render() {
+    const {className} = this.props;
     return(
-      <div>
-        <canvas id="map" style={style}></canvas>
-      </div>
+      <ClickableCanvas className={className}></ClickableCanvas>
     )
   }
 }

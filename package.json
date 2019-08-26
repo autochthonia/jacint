@@ -1,0 +1,20 @@
+{
+  "name": "jacint",
+  "version": "0.0.2",
+  "private": true,
+  "dependencies": {},
+  "scripts": {},
+  "eslintConfig": {},
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

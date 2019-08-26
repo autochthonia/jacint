@@ -1,8 +1,9 @@
 canvas {
   background-image: url('../images/map.jpg');
   background-repeat: no-repeat;
+}
 
-  .fbf {
-    background-image: url('../images/North-Focused-Map-v1.jpeg');
-  }
+.fbf {
+  background-image: url('../images/North-Focused-Map-v1.jpeg');
+  background-repeat: no-repeat;
 }

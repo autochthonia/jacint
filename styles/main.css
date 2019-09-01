@@ -3,7 +3,8 @@ canvas {
   background-repeat: no-repeat;
 }
 
-.fbf {
-  background-image: url('../images/North-Focused-Map-v1.jpeg');
-  background-repeat: no-repeat;
+  .fbf {
+    background-image: url('../images/North-Focused-Map-v2.jpeg');
+    background-repeat: no-repeat;
+  }
 }

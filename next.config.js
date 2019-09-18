@@ -6,7 +6,7 @@ module.exports = {
     const paths = {}
   
     defaultMaps.forEach(mapId => {
-      paths[`/${mapId}`] = {page: '/[mapId]', query: {mapId: mapId}}
+      paths[`/${mapId}`] = {page: `/${mapId}`, query: {mapId: mapId}}
     })
 
     return paths

@@ -1,14 +1,16 @@
 import {Atlas, ClickableCanvasState, LocationProps, TextProps, TravelOptions} from './types';
 
+const sourcePrefix: string = process.env.NODE_ENV === 'production' ? '.' : ''
+
 export const defaultMaps: Atlas = {
   creationFull: {
-    source: '/static/Creation-Full-Map.jpg',
+    source: sourcePrefix+'/static/Creation-Full-Map.jpg',
     height: 3740,
     width: 5780,
     scale: 2.85
   },
   futileBloodFlows: {
-    source: '/static/North-Focused-Map-v2.jpeg',
+    source: sourcePrefix+'/static/North-Focused-Map-v2.jpeg',
     height: 3752,
     width: 6176,
     scale: 1.43

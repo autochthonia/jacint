@@ -1,13 +1,17 @@
-import ClickableCanvas from '../src/clickable-canvas'
+import React from 'react'
+import ClickableCanvas from '../app/clickable-canvas'
 
-import {defaultMaps, defaultCanvasState} from '../src/common/constants'
-import {MapView} from '../src/common/types'
+import { defaultMaps, defaultCanvasState } from '../app/common/constants'
+import { MapView } from '../app/common/types'
 
-const Map = props => <ClickableCanvas mapView={props.view} mapState={defaultCanvasState}/>
+const Map = props => {
+  return <ClickableCanvas mapView={props.view} mapState={defaultCanvasState} />
+}
 
-Map.getInitialProps = (context: any) => {
-  const view: MapView = defaultMaps[context.query.mapId]
-  return {view}
+Map.getInitialProps = async context => {
+  console.log( context.query )
+  const view: MapView = defaultMaps[ context.query.mapId ]
+  return { view }
 }
 
 export default Map

@@ -1,4 +1,10 @@
-import {Atlas, ClickableCanvasState, LocationProps, TextProps, TravelOptions} from './types';
+import {
+  Atlas,
+  ClickableCanvasState,
+  LocationProps,
+  TextProps,
+  TravelOptions
+} from './types'
 
 const sourcePrefix: string = process.env.NODE_ENV === 'production' ? '.' : ''
 
@@ -43,7 +49,7 @@ export const defaultTransportation: TravelOptions = {
     rate: 100,
     maxLength: 10
   }
-};
+}
 
 const defaultLocationProps: LocationProps = {
   x: 0,
@@ -51,7 +57,7 @@ const defaultLocationProps: LocationProps = {
   visible: false
 }
 
-const defaultTextProps: TextProps = {...defaultLocationProps, text: ''}
+const defaultTextProps: TextProps = { ...defaultLocationProps, text: '' }
 
 export const defaultCanvasState: ClickableCanvasState = {
   clicks: 0,

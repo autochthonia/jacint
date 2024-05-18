@@ -1,26 +1,40 @@
-import React, {useReducer} from 'react'
-import {Circle, Layer, Line, Stage, Text} from 'react-konva'
-import {ClickableCanvasProps, MapClickReducerArgs, ClickableCanvasState} from '../common/types'
+import React, { useReducer } from 'react'
+import { Circle, Layer, Line, Stage, Text } from 'react-konva'
+import { KonvaEventObject } from 'konva/lib/Node'
+import { Vector2d } from 'konva/lib/types'
+
+import {
+  ClickableCanvasProps,
+  MapClickReducerArgs,
+  ClickableCanvasState,
+} from '../common/types'
 import { defaultCanvasState } from '../common/constants'
 import MapClickReducer from './map-click-reducer'
 
-export default (props: ClickableCanvasProps) => {
-  const {source, height, width} = props.mapView
+const ClickableCanvas = ( props: ClickableCanvasProps ) => {
+  const { source, height, width } = props.mapView
 
-  const style = {
+  const style: React.CSSProperties = {
     backgroundImage: `url('${source}')`,
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'auto',
-    position: 'absolute' as 'absolute'
+    position: 'absolute',
   }
 
-  const [reducerState, dispatch] = useReducer(MapClickReducer, defaultCanvasState as ClickableCanvasState)
+  const [ reducerState, dispatch ] = useReducer(
+    MapClickReducer,
+    defaultCanvasState as ClickableCanvasState
+  )
 
-  const {start, end, text} = reducerState;
+  const { start, end, text } = reducerState
 
-  const MapClickHandler = (evt: any): any => {
-    const stateAtClick: MapClickReducerArgs = {mapView: props.mapView, clickPosition: evt.currentTarget.pointerPos}
-    return dispatch(stateAtClick)
+  const MapClickHandler = ( evt: KonvaEventObject<MouseEvent> ): void => {
+    const stateAtClick: MapClickReducerArgs = {
+      mapView: props.mapView,
+      clickPosition: evt.target.getStage()?.getPointerPosition() as Vector2d,
+    }
+    console.log( evt.currentTarget )
+    return dispatch( stateAtClick )
   }
 
   return (
@@ -28,7 +42,7 @@ export default (props: ClickableCanvasProps) => {
       <Stage width={width} height={height} onClick={MapClickHandler}>
         <Layer>
           <Line
-            points={[start.x, start.y, end.x, end.y]}
+            points={[ start.x, start.y, end.x, end.y ]}
             visible={end.visible}
             stroke={'black'}
           />
@@ -64,3 +78,5 @@ export default (props: ClickableCanvasProps) => {
     </div>
   )
 }
+
+export default ClickableCanvas

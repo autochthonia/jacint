@@ -1,21 +1,25 @@
 {
   "name": "jacint",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "private": true,
   "dependencies": {
-    "konva": "^4.0.7",
-    "next": "^9.0.5",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
-    "react-konva": "^16.9.0-0"
+    "canvas": "^2.11.2",
+    "konva": "^9.3.8",
+    "next": "^14.2.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-konva": "^18.2.10"
   },
   "scripts": {
+    "lint": "next lint",
     "dev": "next",
     "build": "next build",
     "export": "next export",
     "start": "next start"
   },
-  "eslintConfig": {},
+  "eslintConfig": {
+    "extends": "next/core-web-vitals"
+  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -29,9 +33,14 @@
     ]
   },
   "devDependencies": {
-    "@types/node": "^12.7.4",
-    "@types/react": "^16.9.2",
-    "@types/react-dom": "^16.9.0",
-    "typescript": "^3.6.2"
+    "@next/eslint-plugin-next": "^14.2.3",
+    "@types/node": "^20.12.12",
+    "@types/react": "^18.3.1",
+    "@types/react-dom": "^18.3.0",
+    "@typescript-eslint/eslint-plugin": "^7.9.0",
+    "@typescript-eslint/parser": "^7.9.0",
+    "eslint": "^8.0.0",
+    "eslint-plugin-react": "^7.34.1",
+    "typescript": "^5.4.5"
   }
 }

@@ -8,10 +8,22 @@ const Map = props => {
   return <ClickableCanvas mapView={props.view} mapState={defaultCanvasState} />
 }
 
-Map.getInitialProps = async context => {
-  console.log( context.query )
-  const view: MapView = defaultMaps[ context.query.mapId ]
-  return { view }
+export const getStaticProps = async ( context: {
+    params: { mapId: string }
+} ) => {
+  const view: MapView = defaultMaps[ context.params.mapId ]
+  return { props: { view } }
+}
+
+export const getStaticPaths = async() => {
+  const paths = Object.keys( defaultMaps ).map( mapId => ( {
+    params: { mapId }
+  } ) )
+
+  return {
+    paths,
+    fallback: false,
+  }
 }
 
 export default Map

@@ -1,18 +1,46 @@
-import React, { useReducer } from 'react'
+import React, { type Dispatch, useReducer } from 'react'
 import { Circle, Layer, Line, Stage, Text } from 'react-konva'
-import { KonvaEventObject } from 'konva/lib/Node'
-import { Vector2d } from 'konva/lib/types'
+import type { KonvaEventObject } from 'konva/lib/Node'
+import type { Vector2d } from 'konva/lib/types'
 
-import {
+import type {
   ClickableCanvasProps,
-  MapClickReducerArgs,
-  ClickableCanvasState,
+  ClickableCanvasState
 } from '../common/types'
 import { defaultCanvasState } from '../common/constants'
 import MapClickReducer from './map-click-reducer'
 
-const ClickableCanvas = ( props: ClickableCanvasProps ) => {
-  const { source, height, width } = props.mapView
+/**
+ * This factory creates a function that handles clicks on the ClickableCanvas
+ * 
+ * @param dispatcher a function that updates the component's state
+ * @returns the click-handling function (see below)
+ */
+const MapClickHandlerFactory = ( dispatcher: Dispatch<Vector2d> ) =>
+  /**
+   * Captures a mouse click event on the Canvas component, storing the mouse
+   * position data from that event in the component's state
+   * 
+   * @param evt the Konva mouse click event object
+   * @returns a dispatcher invocation, which itself returns void but updates the
+   *          component state
+   */
+  ( evt: KonvaEventObject<MouseEvent> ): void => {
+    const clickPosition = evt.target.getStage()?.
+    getPointerPosition() as Vector2d
+    return dispatcher( clickPosition )
+  }
+
+/**
+ * A wrapped Konva Stage overlaying a map image, on which points and a line
+ * connecting them are drawn on mouse click events.
+ * 
+ * @param props component props, including mapView, a reference to the current
+ *              map on the canvas, and the default state
+ * @returns
+ */
+const ClickableCanvas = ( { mapView }: ClickableCanvasProps ) => {
+  const { source, height, width } = mapView
 
   const style: React.CSSProperties = {
     backgroundImage: `url('${source}')`,
@@ -21,21 +49,14 @@ const ClickableCanvas = ( props: ClickableCanvasProps ) => {
     position: 'absolute',
   }
 
-  const [ reducerState, dispatch ] = useReducer(
+  const [ state, dispatch ] = useReducer(
     MapClickReducer,
-    defaultCanvasState as ClickableCanvasState
+    { ...defaultCanvasState, mapView } as ClickableCanvasState
   )
 
-  const { start, end, text } = reducerState
+  const { start, end, text } = state
 
-  const MapClickHandler = ( evt: KonvaEventObject<MouseEvent> ): void => {
-    const stateAtClick: MapClickReducerArgs = {
-      mapView: props.mapView,
-      clickPosition: evt.target.getStage()?.getPointerPosition() as Vector2d,
-    }
-    console.log( evt.currentTarget )
-    return dispatch( stateAtClick )
-  }
+  const MapClickHandler = MapClickHandlerFactory( dispatch )
 
   return (
     <div style={style}>
@@ -68,7 +89,7 @@ const ClickableCanvas = ( props: ClickableCanvasProps ) => {
             y={text.y}
             fontSize={32}
             fontStyle={'bold'}
-            text={text.text}
+            text={text.message}
             fill={'black'}
             stroke={'white'}
             strokeWidth={1.5}

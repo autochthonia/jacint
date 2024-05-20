@@ -4,36 +4,49 @@ import {
   LocationProps,
   MapView,
   TextProps,
-  TransportationMode
+  TransportationMode,
 } from '../common/types'
 import { defaultTransportation } from '../common/constants'
 
-export default ( start: LocationProps, end: LocationProps, view: MapView ): TextProps => {
+export default (
+  start: LocationProps,
+  end: LocationProps,
+  view: MapView
+): TextProps => {
   const distance: number = calculateDistance( start, end, view.scale )
 
-  let text: string = distance + ' miles'
+  let message: string = distance + ' miles'
   for ( const mode in defaultTransportation ) {
-    text += calculateTravel( defaultTransportation[ mode ], distance )
+    message += calculateTravel( defaultTransportation[ mode ], distance )
   }
 
   const travelText: TextProps = {
-    x: end.x - ( end.x > ( view.width - 200 ) ? 426 : -24 ),
-    y: end.y - ( end.y > ( view.height - 200 ) ? 440 : -10 ),
-    text: text,
-    visible: end.visible
+    x: end.x - ( end.x > view.width - 200 ? 426 : -24 ),
+    y: end.y - ( end.y > view.height - 200 ? 440 : -10 ),
+    message,
+    visible: end.visible,
   }
 
   return travelText
 }
 
-const calculateDistance = ( start: LocationProps, end: LocationProps, scale: number ): number => {
+const calculateDistance = (
+  start: LocationProps,
+  end: LocationProps,
+  scale: number
+): number => {
   const delta: Vector2d = { x: end.x - start.x, y: end.y - start.y }
-  const distance: number = Math.sqrt( Math.pow( delta.x, 2 ) + Math.pow( delta.y, 2 ) )
-  
+  const distance: number = Math.sqrt(
+    Math.pow( delta.x, 2 ) + Math.pow( delta.y, 2 )
+  )
+
   return Math.floor( distance * scale )
 }
 
-const calculateTravel = ( mode: TransportationMode, distance: number ): string => {
+const calculateTravel = (
+  mode: TransportationMode,
+  distance: number
+): string => {
   const rawHours: number = distance / mode.rate
   const rawDays: number = rawHours / mode.maxLength
   const days: number = Math.floor( rawDays )

@@ -17,18 +17,16 @@
   "parserOptions": {
     "parser": "@typescript-eslint/parser"
   },
-  "plugins": [
-    "@typescript-eslint",
-    "react"
-  ],
+  "plugins": ["@typescript-eslint", "react"],
   "rules": {
-    "array-bracket-spacing": [ "error", "always" ],
+    "array-bracket-spacing": ["error", "always"],
     "computed-property-spacing": ["error", "always"],
-    "object-curly-spacing": [ "error", "always" ],
+    "max-len": ["error", { "code": 80, "tabWidth": 2 }],
+    "object-curly-spacing": ["error", "always"],
     "react/prop-types": "off",
     "react/react-in-jsx-scope": "off",
-    "semi": [ "error", "never" ],
-    "space-before-blocks": [ "error", "always" ],
+    "semi": ["error", "never"],
+    "space-before-blocks": ["error", "always"],
     "space-in-parens": ["error", "always"]
   }
 }

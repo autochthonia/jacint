@@ -1,4 +1,4 @@
-import { Vector2d } from 'konva/lib/types'
+import type { Vector2d } from 'konva/lib/types'
 
 export interface MapView {
   source: string
@@ -22,22 +22,17 @@ export interface LocationProps extends Vector2d {
 }
 
 export interface TextProps extends LocationProps {
-  text: string
+  message: string
 }
 
 export interface ClickableCanvasState {
   clicks: number
+  mapView: MapView
   start: LocationProps
   end: LocationProps
   text: TextProps
 }
 
 export interface ClickableCanvasProps {
-  mapState: ClickableCanvasState
-  mapView: MapView
-}
-
-export interface MapClickReducerArgs {
-  clickPosition: Vector2d
   mapView: MapView
 }
